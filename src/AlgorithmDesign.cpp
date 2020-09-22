@@ -79,7 +79,7 @@ void sort::insertBinary( std::vector<T>& vData )
 template void sort::insertBinary<int>( std::vector<int>& );
 
 template< typename T>
-int search::binary( const std::vector<T>& vData, T value, int low, int high )
+int search::binary( const std::vector<T>& vData, const T& value, int low, int high )
 {
   // Check if bounds are equal
   if(high <= low)
@@ -101,6 +101,6 @@ int search::binary( const std::vector<T>& vData, T value, int low, int high )
   
   return binary( vData, value, part+1, high ); 
 }
-template int search::binary<int>( const std::vector<int>&, int, int, int );
+template int search::binary<int>( const std::vector<int>&, const int&, int, int );
 
 

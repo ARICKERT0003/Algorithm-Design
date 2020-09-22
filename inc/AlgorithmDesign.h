@@ -28,7 +28,7 @@ namespace sort
 namespace search
 {
   template< typename T>
-  int binary( const std::vector<T>&, T, int, int);
+  int binary( const std::vector<T>&, const T&, int, int);
 }
 
 #endif

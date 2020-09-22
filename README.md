@@ -30,7 +30,7 @@ C++ Code for CSE619. Library to help complete projects and homework.
    
     `unzip Algorithm-Design-master.zip`
 
-2. First time build
+2. First time build (Linux)
    
     1. #### Make Build Directory
       
@@ -41,6 +41,25 @@ C++ Code for CSE619. Library to help complete projects and homework.
       `cmake .. && make`
 
     3. #### Build Project
+
+      `cmake -DLIBALGO_BUILD_PROJECTS=ON .. && make`
+
+      All individual projects are default ON but may be switched OFF.
+
+3. First time build (Windows)
+   
+    1. #### Make Build Directory
+      
+      Make directory titled `build` inside `Algorithm-Design` directory
+
+    2. #### Build Libraries
+
+      Open command prompt and type:
+      `cmake .. && make`
+
+    3. #### Build Project
+
+      Open command prompt again and type:
 
       `cmake -DLIBALGO_BUILD_PROJECTS=ON .. && make`
 
@@ -76,3 +95,14 @@ Projects are the individual assignment code. The projects link to the library ar
     
     LIBALGO_BUILD_PROJECT_INSERTION_SORT (Default ON)
 
+    3. #### Run Project
+
+    (Windows)
+    
+    Make sure library and project have been built.
+
+    Go to `projects/InsertionSort/`
+
+    Open command prompt and type:
+
+    `./project-insertion-sort`
