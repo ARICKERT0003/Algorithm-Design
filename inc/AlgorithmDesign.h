@@ -29,6 +29,12 @@ namespace sort
 
   template< typename T>
   void merge( std::vector<T>&, int, int, int );
+
+  template< typename T>
+  void heap( std::vector<T>& );
+
+  template< typename T>
+  void heapify( std::vector<T>&, int, int );
 }
 
 namespace search

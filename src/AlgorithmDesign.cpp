@@ -134,11 +134,49 @@ void sort::merge( std::vector<T>& vData, int l, int m, int r )
 template void sort::merge<int>( std::vector<int>&, int, int, int );
 
 template< typename T>
+void sort::heap( std::vector<T>& vData )
+{
+  // Build heap by rearanging from bottom up
+  for( int i=(vData.size()/2)-1; i>=0; i-- )
+  { sort::heapify( vData, vData.size(), i ); }
+
+  // Begin removing nodes, then rearange, repeat
+  for( int i=vData.size()-1; 0<i; i-- )
+  {
+    std::swap( vData[0], vData[i] );
+
+    sort::heapify(vData, i, 0);
+  }
+}
+template void sort::heap<int>( std::vector<int>& );
+
+template< typename T>
+void sort::heapify( std::vector<T>& vData, int heapSize, int i )
+{
+  int largest = i;
+  int lChild = 2*i+1;
+  int rChild = 2*i+2;
+
+  if( lChild < heapSize && vData[ largest ] < vData[ lChild ] )
+  { largest = lChild; }
+
+  if( rChild < heapSize && vData[ largest ] < vData[ rChild ] )
+  { largest = rChild; }
+
+  if( largest != i )
+  {
+    std::swap( vData[i], vData[largest] );
+    sort::heapify( vData, heapSize, largest );
+  }
+}
+template void sort::heapify<int>( std::vector<int>&, int, int );
+
+template< typename T>
 int search::binary( const std::vector<T>& vData, const T& value, int low, int high )
 {
   // Check if bounds are equal
   if(high <= low)
-  { 
+  {
     if( value < vData[low] )
     { return low;}
     else
