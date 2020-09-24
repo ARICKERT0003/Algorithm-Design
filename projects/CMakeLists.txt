@@ -26,4 +26,9 @@ if(LIBALGO_BUILD_PROJECTS)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/InsertionSort)
   endif()
 
+  # Merge Sort
+  if(LIBALGO_BUILD_PROJECT_MERGE_SORT)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/MergeSort)
+  endif()
+
 endif()

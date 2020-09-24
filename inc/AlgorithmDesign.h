@@ -23,6 +23,12 @@ namespace sort
 
   template< typename T>
   void insertBinary( std::vector<T>& );
+
+  template< typename T>
+  void merge( std::vector<T>&, int, int);
+
+  template< typename T>
+  void merge( std::vector<T>&, int, int, int );
 }
 
 namespace search

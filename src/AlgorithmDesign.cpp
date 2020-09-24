@@ -79,6 +79,61 @@ void sort::insertBinary( std::vector<T>& vData )
 template void sort::insertBinary<int>( std::vector<int>& );
 
 template< typename T>
+void sort::merge( std::vector<T>& vData, int l, int r)
+{
+  if( r <= l )
+  { return; }
+
+  int m = ceil( (l+r)/2 );
+
+  sort::merge( vData, l, m );
+  sort::merge( vData, m+1, r );
+  sort::merge( vData, l, m, r);
+}
+template void sort::merge<int>( std::vector<int>&, int, int );
+
+template< typename T>
+void sort::merge( std::vector<T>& vData, int l, int m, int r )
+{
+  std::vector< T > vLeft( vData.begin()+l, vData.begin()+m+1 );
+  std::vector< T > vRight( vData.begin()+m+1, vData.begin()+r+1 );
+
+  typename std::vector<T>::iterator iData = vData.begin()+l;
+  typename std::vector<T>::iterator iLeft = vLeft.begin();
+  typename std::vector<T>::iterator iRight = vRight.begin();
+
+  while( iLeft!=vLeft.end() || iRight!=vRight.end() ) 
+  {
+
+    if( (*iLeft) < (*iRight) && iLeft!=vLeft.end() )
+    { 
+      (*iData) = (*iLeft);
+      iLeft++;
+      iData++;
+      continue;
+    }
+
+    if( (*iRight) < (*iLeft) && iRight!=vRight.end() )
+    {
+      (*iData) = (*iRight);
+      iRight++;
+      iData++;
+      continue;
+    }
+
+    if( iLeft==vLeft.end() )
+    {
+      std::copy( iRight, vRight.end(), iData );
+      return;
+    }
+
+    std::copy( iLeft, vLeft.end(), iData );
+    return;
+  }
+}
+template void sort::merge<int>( std::vector<int>&, int, int, int );
+
+template< typename T>
 int search::binary( const std::vector<T>& vData, const T& value, int low, int high )
 {
   // Check if bounds are equal
