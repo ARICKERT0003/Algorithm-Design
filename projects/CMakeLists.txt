@@ -36,4 +36,9 @@ if(LIBALGO_BUILD_PROJECTS)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/HeapSort)
   endif()
 
+  # Quick Sort
+  if(LIBALGO_BUILD_PROJECT_QUICK_SORT)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/QuickSort)
+  endif()
+
 endif()

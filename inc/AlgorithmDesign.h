@@ -35,6 +35,18 @@ namespace sort
 
   template< typename T>
   void heapify( std::vector<T>&, int, int );
+
+  template<typename T>
+  void quick( std::vector<T>&, int, int);
+  
+  /*
+   *  @fn      sort::partition
+   *  @brief   A component of quick-sort. Will find all values less than the
+   *  value at high index, move them forward, and move the value at high to 
+   *  the index directly following the values found to be lower than it.
+   */
+  template<typename T>
+  int partition( std::vector<T>&, int, int);
 }
 
 namespace search

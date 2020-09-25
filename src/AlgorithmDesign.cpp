@@ -13,6 +13,9 @@ void print( const std::vector<T>& vData )
 template void print<int>( const std::vector<int>& );
 
 
+//===========================
+// Sort
+//===========================
 template< typename T >
 void sort::insertLinear( std::vector<T>& vData )
 {
@@ -171,6 +174,49 @@ void sort::heapify( std::vector<T>& vData, int heapSize, int i )
 }
 template void sort::heapify<int>( std::vector<int>&, int, int );
 
+template< typename T>
+void sort::quick( std::vector<T>& vData, int low, int high )
+{
+  if( high <= low )
+  { return; }
+
+
+  // Find / Move forward all numbers lower than high
+  int i = sort::partition( vData, low, high );
+
+  // Recurse lower
+  sort::quick( vData, low, i-1 );
+
+  // Recurse higher
+  sort::quick( vData, i+1, high);
+}
+template void sort::quick<int>( std::vector<int>&, int, int );
+
+template< typename T>
+int sort::partition( std::vector<T>& vData, int low, int high )
+{
+  // Use high index as comparator
+  int pivot = vData[high]; 
+
+  int i = low-1;
+
+  for(int j=low; j<high; j++)
+  {
+    if( vData[j] < pivot )
+    {
+      i++;
+      std::swap( vData[i], vData[j] );
+    }
+  }
+
+  std::swap( vData[i+1], vData[high] );
+  return i+1;
+}
+template int sort::partition<int>( std::vector<int>&, int, int );
+
+//===========================
+// Search
+//===========================
 template< typename T>
 int search::binary( const std::vector<T>& vData, const T& value, int low, int high )
 {

@@ -8,11 +8,12 @@ project(AlgorithmDesign
 #############################
 # Options
 #############################
-option(LIBALGO_STATIC_BUILD                 "Build static library" OFF)
-option(LIBALGO_BUILD_PROJECTS               "Build samples" OFF)
-option(LIBALGO_BUILD_PROJECT_INSERTION_SORT "Build sample" ON)
-option(LIBALGO_BUILD_PROJECT_MERGE_SORT     "Build sample" ON)
-option(LIBALGO_BUILD_PROJECT_HEAP_SORT      "Build sample" ON)
+option(LIBALGO_STATIC_BUILD                  "Build static library" OFF)
+option(LIBALGO_BUILD_PROJECTS                "Build samples" OFF)
+option(LIBALGO_BUILD_PROJECT_INSERTION_SORT  "Build sample" ON)
+option(LIBALGO_BUILD_PROJECT_MERGE_SORT      "Build sample" ON)
+option(LIBALGO_BUILD_PROJECT_HEAP_SORT       "Build sample" ON)
+option(LIBALGO_BUILD_PROJECT_QUICK_SORT      "Build sample" ON)
 
 # Static or Dynamic Link
 if(LIBALGO_STATIC_BUILD)
