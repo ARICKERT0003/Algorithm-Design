@@ -12,6 +12,7 @@
 #include <math.h>
 #include <memory>
 #include <vector>
+#include <algorithm>
 
 template< typename T>
 void print( const std::vector<T>& vData );
@@ -38,10 +39,7 @@ namespace sort
 
   template<typename T>
   void quick( std::vector<T>&, int, int);
-  
-  template<typename T>
-  void count( std::vector<T>&, T , std::vector<T>&);
-  
+
   /*
    *  @fn      sort::partition
    *  @brief   A component of quick-sort. Will find all values less than the
@@ -50,6 +48,31 @@ namespace sort
    */
   template<typename T>
   int partition( std::vector<T>&, int, int);
+  
+  /*
+   *  @fn      sort::count
+   *  @brief   Histogram based sorting solution.
+   *  @param   inVector Vector of data to be sorted
+   *  @param   maxValue Maximum value contained within inVector
+   *  @param   outVector Sorted vector.
+   */
+  template<typename T>
+  void count( std::vector<T>&, T , std::vector<T>&);
+  
+  /*
+   *  @fn      sort::radix
+   */
+  template<typename T>
+  void radix( std::vector<T>& );
+
+  /*
+   *  @fn      sort::countDigit
+   *  @brief   Histogram based sorting solution.
+   *  @param   inVector Vector of data to be sorted
+   *  @param   digit Base 10 digit for which to sort by
+   */
+  template<typename T>
+  void countDigit( std::vector<T>&, int);
 }
 
 namespace search

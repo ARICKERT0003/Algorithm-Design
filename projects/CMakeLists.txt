@@ -46,4 +46,9 @@ if(LIBALGO_BUILD_PROJECTS)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/CountSort)
   endif()
 
+  # Radix Sort
+  if(LIBALGO_BUILD_PROJECT_RADIX_SORT)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/RadixSort)
+  endif()
+
 endif()

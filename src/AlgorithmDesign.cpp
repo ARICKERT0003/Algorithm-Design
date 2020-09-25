@@ -242,6 +242,52 @@ void sort::count( std::vector<T>& vData, T maxValue, std::vector<T>& vOutput )
 }
 template void sort::count<int>(std::vector<int>&, int, std::vector<int>&);
 
+template< typename T>
+void sort::radix( std::vector<T>& vData )
+{
+  T maxValue = *std::max_element( vData.begin(), vData.end() );
+
+  for( int i=1; (maxValue/i)>0; i*=10 )
+  { 
+    sort::countDigit( vData, i ); 
+    print(vData);
+  }
+}
+template void sort::radix<int>( std::vector<int>& );
+
+template< typename T>
+void sort::countDigit( std::vector<T>& vData, int digit )
+{
+  int i=0;
+
+  // Create output array 
+  std::vector<T> vOutput( vData.size(), 0 );
+
+  // Create histogram array
+  std::vector<T> histogram( 10, 0 ); // Since we are sorting per each base 10 digit
+
+  // Pack histogram
+  for( i=0; i<vData.size(); i++ )
+  { (histogram[ (vData[i]/digit)%10 ])++; }
+
+  // Calculate cumulative histogram
+  for( i=1; i<10; i++ )
+  { histogram[i] += histogram[i-1]; }
+
+  // Histogram maps input data to output data
+  //for( i=0; i<vData.size(); i++ )
+  for( i=vData.size()-1; i>=0; i-- )
+  { 
+    vOutput[ histogram[ (vData[i]/digit)%10 ] -1 ] = vData[i]; // Histogram mapping will be 1 off since it is count based
+    (histogram[ (vData[i]/digit)%10 ])--;                      // Account for duplicate values
+  }
+
+  // Swap input and output vectors
+  vData.swap(vOutput);
+
+}
+template void sort::countDigit<int>(std::vector<int>&, int);
+
 //===========================
 // Search
 //===========================
