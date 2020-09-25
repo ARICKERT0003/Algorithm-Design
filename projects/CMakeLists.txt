@@ -41,4 +41,9 @@ if(LIBALGO_BUILD_PROJECTS)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/QuickSort)
   endif()
 
+  # Count Sort
+  if(LIBALGO_BUILD_PROJECT_COUNT_SORT)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/CountSort)
+  endif()
+
 endif()

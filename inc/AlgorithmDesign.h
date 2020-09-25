@@ -39,6 +39,9 @@ namespace sort
   template<typename T>
   void quick( std::vector<T>&, int, int);
   
+  template<typename T>
+  void count( std::vector<T>&, T , std::vector<T>&);
+  
   /*
    *  @fn      sort::partition
    *  @brief   A component of quick-sort. Will find all values less than the

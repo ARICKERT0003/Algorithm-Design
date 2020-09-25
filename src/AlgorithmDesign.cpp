@@ -214,6 +214,34 @@ int sort::partition( std::vector<T>& vData, int low, int high )
 }
 template int sort::partition<int>( std::vector<int>&, int, int );
 
+template< typename T>
+void sort::count( std::vector<T>& vData, T maxValue, std::vector<T>& vOutput )
+{
+  int i=0;
+
+  // Create output array 
+  vOutput.resize( vData.size() );
+
+  // Create histogram array
+  std::vector<T> histogram( maxValue+1, 0 );
+
+  // Pack histogram
+  for( i=0; i<vData.size(); i++ )
+  { (histogram[ vData[i] ])++; }
+
+  // Calculate cumulative histogram
+  for( i=1; i<histogram.size(); i++ )
+  { histogram[i] += histogram[i-1]; }
+
+  // Histogram maps input data to output data
+  for( i=0; i<vData.size(); i++ )
+  { 
+    vOutput[ histogram[ vData[ i ]] -1 ] = vData[i]; // Histogram mapping will be 1 off since it is count based
+    (histogram[ vData[ i ]])--;                      // Account for duplicate values
+  }
+}
+template void sort::count<int>(std::vector<int>&, int, std::vector<int>&);
+
 //===========================
 // Search
 //===========================
