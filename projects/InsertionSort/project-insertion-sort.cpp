@@ -109,4 +109,36 @@ int main()
     elapsed = elapsed / iMax;
     std::cout << elapsed.count() << "\n";
   } 
+
+  int vSize = 15;
+
+  // Create container for sample set
+  std::vector< int > vData( vSize );
+
+  // Pack container with random numbers
+  makeRandom( vData.begin(), vData.end() );
+
+  // Print unsorted
+  print( vData );
+
+  // Iterate a couple times to get average running time
+  for(int i=0; i<iMax; i++)
+  {
+    // Start timer
+    start = std::chrono::steady_clock::now();
+
+    // Sort using insertion sort (linear search)
+    sort::insertLinearReverse( vData );
+
+    // End timer
+    end = std::chrono::steady_clock::now();
+    elapsed += (end - start);
+  }
+
+  // Print sorted
+  print( vData );
+
+  // Print average runtime
+  elapsed = elapsed / iMax;
+  std::cout << elapsed.count() << "\n";
 }

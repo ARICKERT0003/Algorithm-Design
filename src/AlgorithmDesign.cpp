@@ -50,6 +50,31 @@ void sort::insertLinear( std::vector<T>& vData )
 }
 template void sort::insertLinear<int>( std::vector<int>& );
 
+template< typename T >
+void sort::insertLinearReverse( std::vector<T>& vData )
+{
+  int i, j;
+  T value;
+
+  for(i=vData.size()-2; 0<=i; i--)
+  {
+
+    value = vData[i];
+
+    j = i+1;
+
+    while( j<vData.size() && vData[j] > value)
+    {
+      vData[ j-1 ] = vData[j];
+
+      j++;
+    }
+
+    vData[ j-1 ] = value;
+  }
+}
+template void sort::insertLinearReverse( std::vector<int>& );
+
 template< typename T>
 void sort::insertBinary( std::vector<T>& vData )
 {

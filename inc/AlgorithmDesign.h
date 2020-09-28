@@ -23,6 +23,9 @@ namespace sort
   void insertLinear( std::vector<T>& );
 
   template< typename T>
+  void insertLinearReverse( std::vector<T>& );
+
+  template< typename T>
   void insertBinary( std::vector<T>& );
 
   template< typename T>
