@@ -341,4 +341,37 @@ int search::binary( const std::vector<T>& vData, const T& value, int low, int hi
 }
 template int search::binary<int>( const std::vector<int>&, const int&, int, int );
 
+//===========================
+// Math
+//===========================
+template< typename T>
+void math::matrixMultNaive( const math::Matrix<T>& matA, const math::Matrix<T>& matB, int dim, math::Matrix<T>& matC )
+{
+  for( int i=0; i<dim; i++ )
+  {
+    for(int j=0; j<dim; j++)
+    {
+      matC[i][j] = 0;
 
+      for(int k=0; k<dim; k++)
+      {
+        matC[i][j] += matA[i][k] * matB[k][j];
+      } 
+    }
+  }
+}
+template void math::matrixMultNaive<int>( const math::Matrix<int>&, const math::Matrix<int>&, int, math::Matrix<int>& );
+
+template< typename T>
+void math::print( const math::Matrix<T>& mat )
+{
+  for( int i=0; i<mat.size(); i++ )
+  {
+    for(int j=0; j<(mat[0]).size(); j++)
+    { std::cout << mat[i][j] << " "; }
+
+    std::cout << "\n";
+  }
+  std::cout << "\n";
+}
+template void math::print<int>(const math::Matrix<int>&);

@@ -84,4 +84,20 @@ namespace search
   int binary( const std::vector<T>&, const T&, int, int);
 }
 
+namespace math
+{
+  template< typename T>
+  using Matrix = std::vector< std::vector<T> >;
+
+  /*
+   *  @fn      math::matrixMultNaive
+   *  @brief   Naive implementation of matrix multiplication for square matrices. 
+   */
+  template< typename T>
+  void matrixMultNaive( const Matrix<T>&, const Matrix<T>&, int, Matrix<T>& );
+
+  template< typename T>
+  void print( const Matrix<T>& );
+}
+
 #endif

@@ -51,4 +51,9 @@ if(LIBALGO_BUILD_PROJECTS)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/RadixSort)
   endif()
 
+  # Matrix Muliplication
+  if(LIBALGO_BUILD_PROJECT_MATRIX_MULTIPLICATION)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/MatrixMultiplication)
+  endif()
+
 endif()
