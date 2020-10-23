@@ -344,6 +344,31 @@ template int search::binary<int>( const std::vector<int>&, const int&, int, int 
 //===========================
 // Math
 //===========================
+
+template< typename T>
+T math::exponent( T base, int exp )
+{
+  T value = 1;
+
+  for(int i=0; i<exp; i++)
+  { value *= base; }
+
+  return value;
+}
+template int math::exponent<int>( int, int );
+
+template< typename T>
+T math::exponentDAC( T base, int exp, int mod )
+{
+  if( exp==1 )
+  { return base%mod; }
+
+  T product = exponentDAC( base, (exp/2), mod );
+
+  return ((product*product)%mod);
+}
+template int math::exponentDAC<int>( int, int, int );
+
 template< typename T>
 void math::matrixMultNaive( const math::Matrix<T>& matA, const math::Matrix<T>& matB, int dim, math::Matrix<T>& matC )
 {
@@ -362,6 +387,82 @@ void math::matrixMultNaive( const math::Matrix<T>& matA, const math::Matrix<T>& 
 }
 template void math::matrixMultNaive<int>( const math::Matrix<int>&, const math::Matrix<int>&, int, math::Matrix<int>& );
 
+/*
+template< typename T>
+void math::matrixMultDAC( const math::Matrix<T>& matA, const math::Matrix<T>& matB, int dim, math::Matrix<T>& matC )
+{
+  if( matA.size() == 1 )
+  { return matA([0][0])*(matB[0][0]); } 
+
+  math::Matrix<int> matA11;
+  math::Matrix<int> matA12;
+  math::Matrix<int> matA21;
+  math::Matrix<int> matA22;
+  math::Matrix<int> matB11;
+  math::Matrix<int> matB12;
+  math::Matrix<int> matB21;
+  math::Matrix<int> matB22;
+  math::Matrix<int> matC11;
+  math::Matrix<int> matC12;
+  math::Matrix<int> matC21;
+  math::Matrix<int> matC22;
+  mat::matrixSplit( matA, matA11, matA12, matA21, matA22 ); 
+  mat::matrixSplit( matB, matB11, matB12, matB21, matB22 ); 
+  mat::matrixSplit( matC, matC11, matC12, matC21, matC22 ); 
+
+  math::MatrixMultDAC( matA11, matB11, (dim/2) ) 
+  
+}
+
+template< typename T>
+void math::matrixMultStraussen( const math::Matrix<T>& matA, const math::Matrix<T>& matB, int dim, math::Matrix<T>& matC )
+{
+  if( matA.size() == 1 )
+  { return matA([0][0])*(matB[0][0]); } 
+
+  math::Matrix<int> matA11;
+  math::Matrix<int> matA12;
+  math::Matrix<int> matA21;
+  math::Matrix<int> matA22;
+  math::Matrix<int> matB11;
+  math::Matrix<int> matB12;
+  math::Matrix<int> matB21;
+  math::Matrix<int> matB22;
+  mat::matrixSplit( matA, matA11, matA12, matA21, matA22 ); 
+  mat::matrixSplit( matB, matB11, matB12, matB21, matB22 ); 
+
+  //p1 = math::matrixMultStraussen( matA11, matB12 - matB22 );
+  //p2 = math::matrixMultStraussen( matA11 + matA12, matB22 );
+  //p3 = math::matrixMultStraussen( matA21 + matA22, matB11 );
+  //p4 = math::matrixMultStraussen( matA22, matB12 - matB11 );
+  //p5 = math::matrixMultStraussen( matA11 + matA22, matB11 + matB22 );
+  //p6 = math::matrixMultStraussen( matA12 - matA22, matB21 + matB22 );
+  //p7 = math::matrixMultStraussen( matA11 - matA21, matB11 + matB12 );
+} 
+template void math::matrixMultStraussen<int>( const math::Matrix<int>&, const math::Matrix<int>&, int, math::Matrix<int>& );
+*/
+
+template< typename T>
+void math::matrixSplit( const math::Matrix<T>& matIn, int dim, math::Matrix<T>& mat11, math::Matrix<T>& mat12, math::Matrix<T>& mat21, math::Matrix<T>& mat22)
+{
+  mat11.resize( (dim/2), std::vector( (dim/2), 0 ) );
+  mat12.resize( (dim/2), std::vector( (dim/2), 0 ) );
+  mat21.resize( (dim/2), std::vector( (dim/2), 0 ) );
+  mat22.resize( (dim/2), std::vector( (dim/2), 0 ) );
+
+  for(int i=0; i<(dim/2); i++)
+  {
+    for(int j=0; j<(dim/2); j++)
+    {
+      mat11[i][j] = matIn[i][j];
+      mat12[i][j] = matIn[i][j+(dim/2)];
+      mat21[i][j] = matIn[i+(dim/2)][j];
+      mat22[i][j] = matIn[i+(dim/2)][j+(dim/2)];
+    }
+  }
+}
+template void math::matrixSplit(const math::Matrix<int>&, int, math::Matrix<int>&, math::Matrix<int>&, math::Matrix<int>&, math::Matrix<int>&);
+
 template< typename T>
 void math::print( const math::Matrix<T>& mat )
 {
@@ -375,3 +476,36 @@ void math::print( const math::Matrix<T>& mat )
   std::cout << "\n";
 }
 template void math::print<int>(const math::Matrix<int>&);
+
+int math::Fibonacci( int n )
+{
+  if( n<2 )
+  { return n; }
+
+  int f0 = 0;
+  int f1 = 1;
+  int fib;
+  for( int i=0; i<(n-1); i++ )
+  {
+    fib = f0+f1;
+    std::swap(f0, f1);
+    f1 = fib;
+  }
+  return fib;
+}
+
+int math::FibonacciRecursive( int n )
+{
+  if( n<2 )
+  { return n; }
+
+  return ( FibonacciRecursive( n-1 ) + FibonacciRecursive( n-2 ) );
+}
+
+int math::FibonacciGoldenRatio( int n )
+{
+  if( n<2 )
+  { return n; }
+
+  return ( ceil( std::pow(math::GOLDEN_RATIO, (n)) )/ sqrt(5) );
+}

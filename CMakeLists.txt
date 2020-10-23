@@ -16,7 +16,9 @@ option(LIBALGO_BUILD_PROJECT_HEAP_SORT              "Build sample" ON)
 option(LIBALGO_BUILD_PROJECT_QUICK_SORT             "Build sample" ON)
 option(LIBALGO_BUILD_PROJECT_COUNT_SORT             "Build sample" ON)
 option(LIBALGO_BUILD_PROJECT_RADIX_SORT             "Build sample" ON)
+option(LIBALGO_BUILD_PROJECT_EXPONENT               "Build sample" ON)
 option(LIBALGO_BUILD_PROJECT_MATRIX_MULTIPLICATION  "Build sample" ON)
+option(LIBALGO_BUILD_PROJECT_FIBONACCI              "Build sample" ON)
 
 # Static or Dynamic Link
 if(LIBALGO_STATIC_BUILD)

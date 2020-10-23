@@ -53,6 +53,10 @@ int main()
   math::Matrix<int> matB;
   math::Matrix<int> matC;
 
+  //=========================
+  // Naive
+  // ========================
+
   // Pack conatiner with random numbers
   makeRandom( matA, dim );
   makeRandom( matB, dim );
@@ -67,4 +71,34 @@ int main()
 
   // Print unsorted
   math::print( matC );
+
+  //=========================
+  // Straussen
+  // ========================
+  std::cout << "Straussen\n\n";
+  dim = 8;
+  matA.clear();
+  math::Matrix<int> mat11;
+  math::Matrix<int> mat12;
+  math::Matrix<int> mat21;
+  math::Matrix<int> mat22;
+
+  // Pack conatiner with random numbers
+  makeRandom( matA, dim );
+  //makeRandom( matB, dim );
+  //makeZero( matC, dim );
+
+  // Print unsorted
+  math::print( matA );
+  //math::print( matB );
+  //math::print( matC );
+
+  math::matrixSplit<int>( matA, dim, mat11, mat12, mat21, mat22 );
+
+  // Print unsorted
+  math::print( mat11 );
+  math::print( mat12 );
+  math::print( mat21 );
+  math::print( mat22 );
+
 }

@@ -86,18 +86,66 @@ namespace search
 
 namespace math
 {
+  const double GOLDEN_RATIO = 1.618033989;
+
+  template< typename T>
+  T exponent( T, int );
+
+  template< typename T>
+  T exponentDAC( T, int, int=4294967295 );
+
   template< typename T>
   using Matrix = std::vector< std::vector<T> >;
 
   /*
    *  @fn      math::matrixMultNaive
    *  @brief   Naive implementation of matrix multiplication for square matrices. 
+   *  @param   matA Input matrix to multiply
+   *  @param   matB Input matrix to multiply
+   *  @param   dim Dimension of all matrices
+   *  @param   matC Output matrix
    */
   template< typename T>
   void matrixMultNaive( const Matrix<T>&, const Matrix<T>&, int, Matrix<T>& );
 
+  /*
+   *  @fn      math::matrixMultStrassen
+   *  @brief   Strausen implementation of matrix multiplication for square matrices. 
+   *  @param   matA Input matrix to multiply
+   *  @param   matB Input matrix to multiply
+   *  @param   dim Dimension of all matrices
+   *  @param   matC Output matrix
+   */
+  template< typename T>
+  void matrixMultStrassen( const Matrix<T>&, const Matrix<T>&, int, Matrix<T>& );
+
+  template< typename T>
+  void matrixSplit( const Matrix<T>&, int dim, Matrix<T>&, Matrix<T>&, Matrix<T>&, Matrix<T>& );
+
   template< typename T>
   void print( const Matrix<T>& );
+
+  /*
+   *   @fn     math::Fibonacci
+   *   @brief  Calculate fibonacci number at index n
+   *   @param  index Index of fibonacci number user would like to calculate
+   */
+  int Fibonacci( int );
+
+  /*
+   *   @fn     math::rFibonacci
+   *   @brief  Calculate fibonacci number at index n recursively
+   *   @param  index Index of fibonacci number user would like to calculate
+   */
+  int FibonacciRecursive( int );
+
+  /*
+   *   @fn     math::FibonacciGoldenRatio
+   *   @brief  Calculate fibonacci number at index n using golden ration and
+   *           recursive exponentation
+   *   @param  index Index of fibonacci number user would like to calculate
+   */
+  int FibonacciGoldenRatio( int );
 }
 
 #endif

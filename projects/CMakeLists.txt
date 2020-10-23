@@ -51,9 +51,19 @@ if(LIBALGO_BUILD_PROJECTS)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/RadixSort)
   endif()
 
+  # Exponent
+  if(LIBALGO_BUILD_PROJECT_EXPONENT)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Exponent)
+  endif()
+
   # Matrix Muliplication
   if(LIBALGO_BUILD_PROJECT_MATRIX_MULTIPLICATION)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/MatrixMultiplication)
+  endif()
+
+  # Fibonacci
+  if(LIBALGO_BUILD_PROJECT_FIBONACCI)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Fibonacci)
   endif()
 
 endif()
