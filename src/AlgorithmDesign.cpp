@@ -341,6 +341,64 @@ int search::binary( const std::vector<T>& vData, const T& value, int low, int hi
 }
 template int search::binary<int>( const std::vector<int>&, const int&, int, int );
 
+template< typename T>
+void search::LCS( const std::vector<T>& vSeq1, const std::vector<T>& vSeq2, int index1, int index2, math::Matrix<int>& vSeqOut )
+{
+
+  if( vSeq1[ index1 ] == vSeq2[ index2 ] )
+  { 
+    if( index1==0 && index2==0 )
+    { 
+      vSeqOut[index1][index2] = 1; 
+      return; 
+    }
+    else if( index1==0 )
+    { 
+      search::LCS(vSeq1, vSeq2, index1, index2-1, vSeqOut); 
+      vSeqOut[index1][index2] = 1; 
+      return;
+    }
+    else if( index2==0 )
+    { 
+      search::LCS(vSeq1, vSeq2, index1-1, index2, vSeqOut); 
+      vSeqOut[index1][index2] = 1; 
+      return;
+    }
+    else
+    { 
+      search::LCS(vSeq1, vSeq2, index1-1, index2-1, vSeqOut); 
+      search::LCS(vSeq1, vSeq2, index1-1, index2, vSeqOut);
+      search::LCS(vSeq1, vSeq2, index1, index2-1, vSeqOut);
+      vSeqOut[index1][index2] = 1 + vSeqOut[index1-1][index2-1]; 
+    }
+  }
+  else
+  {
+    if( index1==0 && index2==0 )
+    { return; }
+    else if( index1==0 )
+    { 
+      search::LCS(vSeq1, vSeq2, index1, index2-1, vSeqOut); 
+      vSeqOut[index1][index2] = vSeqOut[index1][index2-1]; 
+      return;
+    }
+    else if( index2==0 )
+    { 
+      search::LCS(vSeq1, vSeq2, index1-1, index2, vSeqOut); 
+      vSeqOut[index1][index2] = vSeqOut[index1-1][index2]; 
+      return;
+    }
+    else
+    { 
+      search::LCS(vSeq1, vSeq2, index1-1, index2-1, vSeqOut); 
+      search::LCS(vSeq1, vSeq2, index1-1, index2, vSeqOut);
+      search::LCS(vSeq1, vSeq2, index1, index2-1, vSeqOut);
+      vSeqOut[index1][index2] = std::max( vSeqOut[index1][index2-1], vSeqOut[index1-1][index2] );
+    }
+  }
+} 
+template void search::LCS<char>( const std::vector<char>&, const std::vector<char>&, int, int, math::Matrix<int>&);
+
 //===========================
 // Math
 //===========================
@@ -509,3 +567,28 @@ int math::FibonacciGoldenRatio( int n )
 
   return ( ceil( std::pow(math::GOLDEN_RATIO, (n)) )/ sqrt(5) );
 }
+
+//===========================
+// Optimization
+//===========================
+
+void optimize::rodCutting( std::vector< int >& cost, std::vector< int >& optimize )
+{
+  int tempOpt = 0;
+  for(int i=0; i<cost.size(); i++)
+  {
+    optimize[i] = cost[i];
+
+    for( int j=0; j<ceil((i+1)/2); j++ )
+    { 
+      tempOpt = optimize[j] + optimize[i-(j+1)]; 
+      //std::cout << "Length: " << i+1 << " Cost " << optimize[j] << "+" << optimize[i-(j+1)] << "\n";
+      optimize[i] = optimize[i] < tempOpt ? tempOpt : optimize[i];
+    }
+  }
+} 
+
+
+
+
+

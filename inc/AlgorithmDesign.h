@@ -78,12 +78,6 @@ namespace sort
   void countDigit( std::vector<T>&, int);
 }
 
-namespace search
-{
-  template< typename T>
-  int binary( const std::vector<T>&, const T&, int, int);
-}
-
 namespace math
 {
   const double GOLDEN_RATIO = 1.618033989;
@@ -148,4 +142,17 @@ namespace math
   int FibonacciGoldenRatio( int );
 }
 
+namespace search
+{
+  template< typename T>
+  int binary( const std::vector<T>&, const T&, int, int);
+
+  template< typename T>
+  void LCS( const std::vector<T>&, const std::vector<T>&, int, int, math::Matrix<int>& );
+}
+
+namespace optimize
+{
+  void rodCutting( std::vector< int >&, std::vector< int >& );
+}
 #endif

@@ -66,4 +66,14 @@ if(LIBALGO_BUILD_PROJECTS)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Fibonacci)
   endif()
 
+  # Rod Cutting
+  if(LIBALGO_BUILD_PROJECT_RODCUTTING)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/RodCutting)
+  endif()
+
+  # LCS
+  if(LIBALGO_BUILD_PROJECT_LCS)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/LCS)
+  endif()
+
 endif()
