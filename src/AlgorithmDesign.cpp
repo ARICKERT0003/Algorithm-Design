@@ -526,10 +526,6 @@ void math::matrixChainCost( const std::vector< int >& dims, math::Matrix< int >&
   int dim = dims.size()-1;
   int j, m, q;
 
-  mat1.resize( dim, std::vector( dim, 0 ) );
-  mat2.resize( dim, std::vector( dim, 0 ) );
-
-
   for( int l=1; l<(dim); l++ )
   {
     for( int i=1; i<=(dim-l); i++ )
