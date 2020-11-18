@@ -61,6 +61,11 @@ if(LIBALGO_BUILD_PROJECTS)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/MatrixMultiplication)
   endif()
 
+  # Matrix Chain
+  if(LIBALGO_BUILD_PROJECT_MATRIX_CHAIN)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/MatrixChain)
+  endif()
+
   # Fibonacci
   if(LIBALGO_BUILD_PROJECT_FIBONACCI)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Fibonacci)

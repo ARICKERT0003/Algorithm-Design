@@ -521,6 +521,65 @@ void math::matrixSplit( const math::Matrix<T>& matIn, int dim, math::Matrix<T>& 
 }
 template void math::matrixSplit(const math::Matrix<int>&, int, math::Matrix<int>&, math::Matrix<int>&, math::Matrix<int>&, math::Matrix<int>&);
 
+void math::matrixChainCost( const std::vector< int >& dims, math::Matrix< int >& mat1, math::Matrix< int >& mat2)
+{
+  int dim = dims.size()-1;
+  int j, m, q;
+
+  mat1.resize( dim, std::vector( dim, 0 ) );
+  mat2.resize( dim, std::vector( dim, 0 ) );
+
+
+  for( int l=1; l<(dim); l++ )
+  {
+    for( int i=1; i<=(dim-l); i++ )
+    {
+      j = i+l;
+      m=-1; 
+      q=-1;
+
+      for(int k=i; k<=(j-1); k++ )
+      {
+        int x = mat1[i-1][k-1] + mat1[k][j-1] + ( dims[i-1] * dims[k] * dims[j] );
+
+        if( m >= x || m == -1 )
+        {
+          m = x;
+          q = k;
+        }
+      }
+
+      mat1[i-1][j-1] = m;
+      mat2[i-1][j-1] = q;
+    }
+  }
+}
+
+void math::matrixChainCostRecursive(const std::vector< int >& dims, int row, int col, math::Matrix< int >& cost, math::Matrix< int >& order)
+{
+  // These values remain 0
+  if( row == col )
+  { return; }
+
+  int tempCost = 0;
+
+  // If cost has not been calc'd, calc
+  for( int shift=row; shift<col; shift++ )
+  {
+    if( cost[row][shift] == 0 )
+    { matrixChainCostRecursive( dims, row, shift, cost, order); }
+    if( cost[shift+1][col] == 0 )                                
+    { matrixChainCostRecursive( dims, shift+1, col, cost, order); }
+
+    tempCost = cost[row][shift] + cost[shift+1][col] + dims[row]*dims[shift+1]*dims[col+1];
+    if( tempCost < cost[row][col] || cost[row][col] == 0)
+    { 
+      cost[row][col] = tempCost; 
+      order[row][col] = shift+1;
+    }
+  }
+}
+
 template< typename T>
 void math::print( const math::Matrix<T>& mat )
 {
@@ -534,6 +593,17 @@ void math::print( const math::Matrix<T>& mat )
   std::cout << "\n";
 }
 template void math::print<int>(const math::Matrix<int>&);
+
+template< typename T>
+void math::zero( math::Matrix< T >& mat )
+{
+  for( int i=0; i<mat.size(); i++ )
+  {
+    for(int j=0; j<(mat[0]).size(); j++)
+    { mat[i][j] = 0; }
+  }
+}
+template void math::zero<int>( math::Matrix<int>& );
 
 int math::Fibonacci( int n )
 {

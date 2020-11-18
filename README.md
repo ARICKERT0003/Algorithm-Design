@@ -97,8 +97,6 @@ Projects are the individual assignment code. The projects link to the library ar
 
     3. #### Run Project
 
-    (Windows)
-    
     Make sure library and project have been built.
 
     Go to `projects/InsertionSort/`
@@ -106,3 +104,36 @@ Projects are the individual assignment code. The projects link to the library ar
     Open command prompt and type:
 
     `./project-insertion-sort`
+
+2. #### Project 2:
+
+    1. #### Description
+
+    This project compares 2 matrix chain multiplication optimization
+    algorithms. One algorithm is a tabular implementation and the other is
+    a recursive implementation. 2 data sets of different sizes were specified
+    in the project outline. They are both created in the driver program and
+    used in a timed test with each algorithm. Each algorithm is run 100 and the
+    to get total is averaged to achieve statistically stable results.
+
+      * Makes data set 1
+      * Makes solution containers
+      * Runs each algorithm 100 times
+      * Calculates average time
+      * Prints results
+      * Creates data set 2. repeat.
+
+    2. #### CMake Variable
+
+    LIBALGO_BUILD_PROJECT_MATRIX_CHAIN (Default ON)
+
+    3. #### Run Project
+
+    Make sure library and project have been built.
+
+    Go to `projects/MatrixChain/`
+
+    Open command prompt and type:
+
+    `./project-matrix-chain`
+

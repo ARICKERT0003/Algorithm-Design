@@ -116,8 +116,14 @@ namespace math
   template< typename T>
   void matrixSplit( const Matrix<T>&, int dim, Matrix<T>&, Matrix<T>&, Matrix<T>&, Matrix<T>& );
 
+  void matrixChainCost( const std::vector< int >&, math::Matrix< int >&, math::Matrix< int >& );
+  void matrixChainCostRecursive(const std::vector< int >&, int, int, math::Matrix< int >&, math::Matrix< int >&);
+
   template< typename T>
   void print( const Matrix<T>& );
+
+  template< typename T>
+  void zero( Matrix<T>& );
 
   /*
    *   @fn     math::Fibonacci
