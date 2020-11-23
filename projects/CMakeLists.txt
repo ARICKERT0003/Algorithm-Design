@@ -81,4 +81,9 @@ if(LIBALGO_BUILD_PROJECTS)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/LCS)
   endif()
 
+  # MST
+  if(LIBALGO_BUILD_PROJECT_MST)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/MST)
+  endif()
+
 endif()

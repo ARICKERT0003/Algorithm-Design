@@ -635,6 +635,109 @@ int math::FibonacciGoldenRatio( int n )
 }
 
 //===========================
+// Graph
+//===========================
+
+template< typename T>
+void graph::mstKruskal( graph::AdjacencyGraph< T >& inGraph, graph::AdjacencyGraph< T >& outGraph )
+{
+  std::list< graph::WeightedEdge<T> > lEdge; // Priority Queue
+  typename std::list< WeightedEdge< T > >::iterator iEdge;
+  std::list< std::list< int > > lIndex; // Forest
+  
+  // Insert edges into list, sorted by weight
+  for( int i=0; i<inGraph.size(); i++ )
+  {
+    for( int j=0; j<inGraph.size(); j++ )
+    {
+      if( inGraph[i][j] != 0 )
+      {
+        if( lEdge.empty() )
+        { lEdge.emplace_back( i, j, inGraph[i][j] ); continue;}
+
+        iEdge = lEdge.begin();
+        for(; iEdge!=lEdge.end(); iEdge++ )
+        {
+          if( inGraph[i][j] < (*iEdge).weight )
+          { lEdge.emplace( iEdge, i, j, inGraph[i][j] ); break; }
+        }
+        if( iEdge==lEdge.end() )
+        { lEdge.emplace_back( i, j, inGraph[i][j] ); }
+      }
+    }
+
+    lIndex.push_back( std::list< int >(1,i) );
+  }
+
+  // Find MST
+  bool found = false;
+  graph::WeightedEdge<T>* pEdge;  
+  std::list< std::list< int > >::iterator iListA;
+  std::list< std::list< int > >::iterator iListB;
+  std::list< int >::iterator iIndex;
+
+  while(! lEdge.empty() )
+  {
+    pEdge = &( lEdge.front() );
+    
+    // Look for vertex A
+    found = false;
+    iListA = lIndex.begin();
+    for(; iListA!=lIndex.end(); iListA++ )
+    {
+      iIndex = (*iListA).begin();
+      for(; iIndex!=(*iListA).end(); iIndex++ )
+      {
+        if( (*iIndex) == pEdge->idA )
+        { found=true; break; } 
+      }  
+      if( found )
+      { break; }
+    }
+
+    // Look for vertex B
+    found = false;
+    iListB = lIndex.begin();
+    for(; iListB!=lIndex.end(); iListB++ )
+    {
+      iIndex = (*iListB).begin();
+      for(; iIndex!=(*iListB).end(); iIndex++ )
+      {
+        if( (*iIndex) == pEdge->idB )
+        { found=true; break; } 
+      }  
+      if( found )
+      { break; }
+    }
+
+    // Splice lists if different
+    if( iListA != iListB )
+    {
+      (*iListA).splice( (*iListA).cend(), (*iListB) ); 
+      lIndex.erase( iListB );
+      outGraph[pEdge->idA][pEdge->idB] = pEdge->weight;
+    }
+
+    lEdge.pop_front();
+  }  
+}
+template void graph::mstKruskal<int>( graph::AdjacencyGraph< int >&, graph::AdjacencyGraph< int >& );
+
+template< typename T>
+void graph::print( const graph::AdjacencyGraph<T>& graph )
+{
+  for( int i=0; i<graph.size(); i++ )
+  {
+    for(int j=0; j<(graph[0]).size(); j++)
+    { std::cout << graph[i][j] << " "; }
+
+    std::cout << "\n";
+  }
+  std::cout << "\n";
+}
+template void graph::print<int>(const graph::AdjacencyGraph<int>&);
+
+//===========================
 // Optimization
 //===========================
 

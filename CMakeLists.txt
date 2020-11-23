@@ -22,6 +22,7 @@ option(LIBALGO_BUILD_PROJECT_MATRIX_CHAIN           "Build sample" ON)
 option(LIBALGO_BUILD_PROJECT_FIBONACCI              "Build sample" ON)
 option(LIBALGO_BUILD_PROJECT_RODCUTTING             "Build sample" ON)
 option(LIBALGO_BUILD_PROJECT_LCS                    "Build sample" ON)
+option(LIBALGO_BUILD_PROJECT_MST                    "Build sample" ON)
 
 # Static or Dynamic Link
 if(LIBALGO_STATIC_BUILD)

@@ -12,6 +12,7 @@
 #include <math.h>
 #include <memory>
 #include <vector>
+#include <list>
 #include <algorithm>
 
 template< typename T>
@@ -155,6 +156,33 @@ namespace search
 
   template< typename T>
   void LCS( const std::vector<T>&, const std::vector<T>&, int, int, math::Matrix<int>& );
+}
+
+namespace graph
+{
+  template< typename T>
+  using AdjacencyGraph = std::vector< std::vector<T> >;
+
+  template< typename T>
+  struct WeightedEdge
+  {
+    WeightedEdge( int a, int b, T w )
+     : idA(a), idB(b), weight(w)
+    {}
+
+    int idA;
+    int idB;
+    T weight;
+  };
+
+  template< typename T >
+  void mstKruskal( AdjacencyGraph< T >&, AdjacencyGraph< T >& );
+
+  template< typename T >
+  void mstPrim( AdjacencyGraph< T >, AdjacencyGraph< T > ); 
+
+  template< typename T>
+  void print( const AdjacencyGraph<T>& );
 }
 
 namespace optimize
